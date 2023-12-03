@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-const returnBothOfWhatIPassIn = (params: { a: unknown; b: unknown }) => {
+const returnBothOfWhatIPassIn = <TA, TB>(params: { a: TA; b: TB }) => {
   return {
     first: params.a,
     second: params.b,
@@ -10,8 +10,8 @@ const returnBothOfWhatIPassIn = (params: { a: unknown; b: unknown }) => {
 
 it("Should return an object where a -> first and b -> second", () => {
   const result = returnBothOfWhatIPassIn({
-    a: "a",
     b: 1,
+    a: "a",
   });
 
   expect(result).toEqual({
