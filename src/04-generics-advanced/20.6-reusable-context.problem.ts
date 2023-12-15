@@ -18,6 +18,17 @@ const useStyled = <TTheme = {}>(func: (theme: TTheme) => CSSProperties) => {
   return {} as CSSProperties;
 };
 
+const makeUseStyled = <TTheme = {}>() => {
+  return useStyled<TTheme>
+}
+
+const tess = makeUseStyled<MyTheme>();
+
+const buttonStyles = tess((theme) => ({
+  color: theme.color.primary,
+  fontSize: theme.fontSize.small,
+}));
+
 interface MyTheme {
   color: {
     primary: string;
