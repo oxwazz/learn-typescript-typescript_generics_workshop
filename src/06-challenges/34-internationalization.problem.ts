@@ -6,7 +6,13 @@ type GetParamKeys<TTranslation extends string> = TTranslation extends ""
   ? [Param, ...GetParamKeys<Tail>]
   : [];
 
-const translate = (translations: unknown, key: unknown, ...args: unknown[]) => {
+const translate = <
+    T extends Record<string, string>,
+    TKey extends keyof T
+>(translations: T,
+  key: TKey,
+  ...args: GetParamKeys<T[TKey]> extends [] ? [] : [Record<GetParamKeys<T[TKey]>[number], string>]
+) => {
   const translation = translations[key];
   const params: any = args[0] || {};
 
